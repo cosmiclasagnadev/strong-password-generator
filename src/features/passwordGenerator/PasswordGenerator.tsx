@@ -1,8 +1,7 @@
 import { TextInput, Box, Button, Group, Overlay } from "@mantine/core";
-import React, { useState } from "react";
+import { useState } from "react";
 import { passwordGenerator } from "./password-utils";
 import { v4 as uuidv4 } from "uuid";
-import { relative } from "path";
 
 const PasswordGenerator = ({
   password,
@@ -26,11 +25,11 @@ const PasswordGenerator = ({
       {
         id: uuidv4(),
         value: password,
-        timestamp: new Date().toLocaleDateString(),
+        timestamp: new Date().toLocaleString(),
       },
       ...passwordList,
     ]);
-    console.log(passwordList);
+    setPassword("");
   };
 
   const handleCopy = () => {
