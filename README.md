@@ -1,5 +1,5 @@
 # Strong Password Generator
-[Preview](http://strong-password-generator-ten.vercel.app/)
+[Preview](http://strpw-generator.vercel.app/)
 
 ## ☕️ To Start with Development
 
