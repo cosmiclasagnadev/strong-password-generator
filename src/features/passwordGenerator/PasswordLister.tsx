@@ -41,7 +41,9 @@ const PasswordLister = ({ passwordList, setPasswordList }: any) => {
           <Group noWrap position="apart">
             <div>
               <Title mb={5} order={6}>
-                Password ID: {password.id}
+                {password.name !== ""
+                  ? password.name
+                  : "Password ID: " + password.id}
               </Title>
               <Tooltip
                 label={copied ? "✅ Copied" : "📋 Copy to Clipboard"}
