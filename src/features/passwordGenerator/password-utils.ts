@@ -14,6 +14,7 @@ export const passwordGenerator = (length: any) => {
   for (let i = 0; i < length; i++) {
     password += symbols[Math.floor(Math.random() * symbols.length)];
     password += alphanumeric[Math.floor(Math.random() * alphanumeric.length)];
+    password = password.slice(0, length);
   }
   return password;
 };

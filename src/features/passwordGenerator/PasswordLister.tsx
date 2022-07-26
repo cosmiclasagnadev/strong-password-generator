@@ -10,6 +10,7 @@ import {
 } from "@mantine/core";
 import { useState } from "react";
 import { Backspace } from "tabler-icons-react";
+import { showNotification } from "@mantine/notifications";
 
 const PasswordLister = ({ passwordList, setPasswordList }: any) => {
   const [copied, setCopiedState] = useState(false);
@@ -17,6 +18,13 @@ const PasswordLister = ({ passwordList, setPasswordList }: any) => {
   const handleDelete = (id: any) => {
     const newPasswordList = passwordList.filter((item: any) => item.id !== id);
     setPasswordList(newPasswordList);
+    syncToLocalStorage(newPasswordList);
+    showNotification({
+      title: "Success!",
+      message: "Password deleted",
+      color: "red",
+      autoClose: 5000,
+    });
   };
 
   const handleCopy = (value: any) => {
@@ -25,6 +33,23 @@ const PasswordLister = ({ passwordList, setPasswordList }: any) => {
     setTimeout(() => {
       setCopiedState(false);
     }, 1000);
+  };
+
+  const syncToLocalStorage = (passwordList: any) => {
+    const store = localStorage.getItem("store");
+    if (store) {
+      const storeObj = JSON.parse(store);
+      if (storeObj.passwords !== passwordList) {
+        localStorage.setItem(
+          "store",
+          JSON.stringify({
+            ...storeObj,
+            passwords: passwordList,
+          })
+        );
+      }
+    }
+    console.log("Synced");
   };
 
   return (

@@ -10,6 +10,7 @@ import { useState } from "react";
 import { useModals } from "@mantine/modals";
 import { passwordGenerator } from "./password-utils";
 import { v4 as uuidv4 } from "uuid";
+import { showNotification } from "@mantine/notifications";
 
 const useStyles = createStyles((theme) => ({
   rootBox: {
@@ -49,6 +50,13 @@ const PasswordGenerator = ({
   const handleGenerate = (length: any) => {
     try {
       setPassword(passwordGenerator(length));
+      showNotification({
+        title: "Success!",
+        message:
+          "Password Generated! Click the box to copy now or add it to your personal list!",
+        color: "blue",
+        autoClose: 5000,
+      });
     } catch (error) {
       alert(error);
     }
@@ -65,6 +73,18 @@ const PasswordGenerator = ({
       ...passwordList,
     ]);
     setPassword("");
+    syncToLocalStorage({
+      name,
+      id: uuidv4(),
+      value: password,
+      timestamp: new Date().toLocaleString(),
+    });
+    showNotification({
+      title: "Success!",
+      message: "Password added to your personal list!",
+      color: "green",
+      autoClose: 5000,
+    });
   };
 
   const handleCopy = () => {
@@ -75,6 +95,24 @@ const PasswordGenerator = ({
     }, 1000);
   };
 
+  const syncToLocalStorage = (newPasswordObject: any) => {
+    const store = localStorage.getItem("store");
+    if (store) {
+      const storeObj = JSON.parse(store);
+      if (storeObj.passwords !== passwordList) {
+        localStorage.setItem(
+          "store",
+          JSON.stringify({
+            ...storeObj,
+            passwords: [newPasswordObject, ...storeObj.passwords],
+          })
+        );
+      }
+    }
+
+    console.log("Synced");
+  };
+
   const openAddItemModal = () => {
     let name = ""; // I don't currently know if this is the best way to handle this functionality but it works so far
     modals.openConfirmModal({
@@ -82,6 +120,7 @@ const PasswordGenerator = ({
       children: (
         <TextInput
           type="text"
+          data-autofocus
           onChange={(e) => {
             name = e.target.value;
           }}
@@ -111,12 +150,18 @@ const PasswordGenerator = ({
         {copyOverlay ? "✅ Copied!" : password}
       </Box>
       <TextInput
+        data-autofocus
         onChange={(e) => {
           setLength(e.currentTarget.value);
         }}
         my="lg"
         placeholder="Password Length:"
         size="lg"
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            handleGenerate(length);
+          }
+        }}
       />
       <Group>
         <Button

@@ -1,18 +1,19 @@
-import { TextInput, Title, Text, Button } from "@mantine/core";
+import { TextInput, Text, Button } from "@mantine/core";
 import React from "react";
 
-const CreateForm = () => {
+const CreateForm = ({ hasStore, setHasStore }: any) => {
   const [name, setName] = React.useState("");
-  function handleCreateStore(name: string) {
+
+  const handleCreateStore = (name: string) => {
     // save store to local storage
-    localStorage.setItem(
-      "store",
-      JSON.stringify({
-        name,
-        passwords: [],
-      })
-    );
-  }
+    const newObject = {
+      name,
+      passwords: [],
+    };
+    localStorage.setItem("store", JSON.stringify(newObject));
+    // set hasStore to true
+    setHasStore(true);
+  };
   return (
     <>
       <Text size="lg" mb="xs">
@@ -28,9 +29,14 @@ const CreateForm = () => {
         mb="md"
         label="To Start, Enter a unique username below:"
         onChange={(e) => setName(e.currentTarget.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            handleCreateStore(name);
+          }
+        }}
       />
       <Button variant="outline" onClick={() => handleCreateStore(name)}>
-        Create my Password Store
+        Create My Password Store
       </Button>
     </>
   );

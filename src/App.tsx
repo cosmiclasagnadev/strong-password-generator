@@ -14,13 +14,17 @@ export default function App() {
     if (store) {
       setHasStore(true);
     }
-  }, [hasStore]);
+  }, [hasStore, setHasStore]);
 
   return (
     <MantineProvider theme={theme} withGlobalStyles withNormalizeCSS>
       <ModalsProvider>
         <NotificationsProvider autoClose={4000}>
-          {hasStore ? <MainPage /> : <CreateStore />}
+          {hasStore ? (
+            <MainPage hasStore={hasStore} setHasStore={setHasStore} />
+          ) : (
+            <CreateStore hasStore={hasStore} setHasStore={setHasStore} />
+          )}
         </NotificationsProvider>
       </ModalsProvider>
     </MantineProvider>
