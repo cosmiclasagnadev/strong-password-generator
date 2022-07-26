@@ -1,20 +1,12 @@
 # Strong Password Generator
-[Preview](http://strpw-generator.vercel.app/)
+[Preview](https://pw.aoponcedeleon.me/)
 
-## ☕️ To Start with Development
+## ☕️ To use this project and develop on top of it (maybe contribute?)
 
-Install dependencies with
+Fork this repo and install dependencies with
 
-### `yarn`
+`yarn`
 
-## 🚀 To Create an Optimized Production Build:
+### Learn More about Mantine's Beautiful React Components Library
 
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Official site is [here](https://mantine.dev/) while you can also view their whole UI templates library [here](https://ui.mantine.dev/) 
