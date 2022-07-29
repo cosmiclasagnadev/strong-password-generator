@@ -7,6 +7,7 @@
     "@mantine/hooks": "^4.2.6",
     "@mantine/modals": "^5.0.0",
     "@mantine/notifications": "^4.2.11",
+    "@splitbee/web": "^0.3.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",

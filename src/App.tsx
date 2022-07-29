@@ -5,11 +5,13 @@ import { theme } from "./theme";
 import MainPage from "./pages/MainPage";
 import { useEffect, useState } from "react";
 import CreateStore from "./pages/CreateStore";
+import splitbee from "@splitbee/web";
 
 export default function App() {
   const [hasStore, setHasStore] = useState(false);
 
   useEffect(() => {
+    splitbee.init();
     const store = localStorage.getItem("store");
     if (store) {
       setHasStore(true);
