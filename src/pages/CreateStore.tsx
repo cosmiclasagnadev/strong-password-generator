@@ -5,15 +5,14 @@ import {
   Stack,
   Transition,
 } from "@mantine/core";
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import CreateForm from "../features/createStore/CreateForm";
 
 const useStyles = createStyles((theme) => ({
   root: {
-    width: "650px",
+    width: "100%",
     height: "100vh",
     justifyContent: "center",
-    maxWidth: theme.breakpoints.md,
     margin: "auto",
   },
   card: {
@@ -22,8 +21,8 @@ const useStyles = createStyles((theme) => ({
     borderRadius: "5px",
   },
 }));
-const CreateStore = ({ hasStore, setHasStore }: any) => {
-  const { classes } = useStyles();
+const CreateStore = ({hasStore, setHasStore}: any) => {
+  const {classes} = useStyles();
   const [transitionMounted, setTransition] = useState(false);
 
   useEffect(() => {
@@ -41,7 +40,7 @@ const CreateStore = ({ hasStore, setHasStore }: any) => {
     >
       {(styles) => (
         <div style={styles}>
-          <Container size="md">
+          <Container size="xs">
             <Stack p="md" className={classes.root}>
               <Paper shadow="lg" p="md" className={classes.card}>
                 <CreateForm hasStore={hasStore} setHasStore={setHasStore} />

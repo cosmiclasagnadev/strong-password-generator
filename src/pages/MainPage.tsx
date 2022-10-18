@@ -10,16 +10,15 @@ import {
   Loader,
   Transition,
 } from "@mantine/core";
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import PasswordGenerator from "../features/passwordGenerator/PasswordGenerator";
-import { openConfirmModal } from "@mantine/modals";
+import {openConfirmModal} from "@mantine/modals";
 import PasswordLister from "../features/passwordGenerator/PasswordLister";
 
 const useStyles = createStyles((theme) => ({
   root: {
     height: "100vh",
     justifyContent: "center",
-    maxWidth: theme.breakpoints.md,
     margin: "auto",
   },
   card: {
@@ -36,13 +35,13 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const MainPage = ({ hasStore, setHasStore }: any) => {
+const MainPage = ({hasStore, setHasStore}: any) => {
   const [transitionMounted, setTransition] = useState(false);
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordList, setPasswordList] = useState([]);
-  const { classes } = useStyles();
+  const {classes} = useStyles();
 
   useEffect(() => {
     const store = localStorage.getItem("store");
@@ -68,7 +67,7 @@ const MainPage = ({ hasStore, setHasStore }: any) => {
       children: (
         <Text>This will delete all of your passwords and username.</Text>
       ),
-      labels: { confirm: "Confirm", cancel: "Cancel" },
+      labels: {confirm: "Confirm", cancel: "Cancel"},
       onConfirm: () => {
         resetAll();
       },
@@ -102,13 +101,13 @@ const MainPage = ({ hasStore, setHasStore }: any) => {
       timingFunction="ease"
     >
       {(styles) => (
-        <Container style={styles} size="md">
+        <Container style={styles} size="sm">
           <Stack p="md" className={classes.root}>
             <Title align="center" order={1}>
               Greetings, {username}!
             </Title>
             <Paper shadow="lg" p="md" className={classes.card}>
-              <Affix position={{ right: 20, bottom: 20 }}>
+              <Affix position={{right: 20, bottom: 20}}>
                 <Button onClick={openResetModal} color="red" variant="outline">
                   Reset All Data
                 </Button>
