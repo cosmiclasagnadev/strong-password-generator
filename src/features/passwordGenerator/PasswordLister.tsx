@@ -8,11 +8,12 @@ import {
   Code,
   Tooltip,
 } from "@mantine/core";
-import { useState } from "react";
-import { Backspace } from "tabler-icons-react";
-import { showNotification } from "@mantine/notifications";
+import {useState} from "react";
+import {Backspace} from "tabler-icons-react";
+import {showNotification} from "@mantine/notifications";
+import secureLocalStorage from "react-secure-storage";
 
-const PasswordLister = ({ passwordList, setPasswordList }: any) => {
+const PasswordLister = ({passwordList, setPasswordList}: any) => {
   const [copied, setCopiedState] = useState(false);
 
   const handleDelete = (id: any) => {
@@ -36,11 +37,11 @@ const PasswordLister = ({ passwordList, setPasswordList }: any) => {
   };
 
   const syncToLocalStorage = (passwordList: any) => {
-    const store = localStorage.getItem("store");
+    const store: any = secureLocalStorage.getItem("store");
     if (store) {
       const storeObj = JSON.parse(store);
       if (storeObj.passwords !== passwordList) {
-        localStorage.setItem(
+        secureLocalStorage.setItem(
           "store",
           JSON.stringify({
             ...storeObj,

@@ -7,6 +7,11 @@ export const passwordGenerator = (length: any) => {
       "It is recommended you don't use a password longer than 25 characters."
     );
   }
+  if (length < 8) {
+    throw new Error(
+      "It is recommended you don't use a password shorter than 8 characters."
+    );
+  }
   const symbols = "!@#$%^&*()_+";
   const alphanumeric =
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

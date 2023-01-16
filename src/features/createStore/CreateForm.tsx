@@ -1,7 +1,8 @@
-import { TextInput, Text, Button } from "@mantine/core";
+import {TextInput, Text, Button} from "@mantine/core";
 import React from "react";
+import secureLocalStorage from "react-secure-storage";
 
-const CreateForm = ({ hasStore, setHasStore }: any) => {
+const CreateForm = ({hasStore, setHasStore}: any) => {
   const [name, setName] = React.useState("");
 
   const handleCreateStore = (name: string) => {
@@ -10,7 +11,7 @@ const CreateForm = ({ hasStore, setHasStore }: any) => {
       name,
       passwords: [],
     };
-    localStorage.setItem("store", JSON.stringify(newObject));
+    secureLocalStorage.setItem("store", JSON.stringify(newObject));
     // set hasStore to true
     setHasStore(true);
   };

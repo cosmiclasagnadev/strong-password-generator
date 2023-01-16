@@ -14,6 +14,7 @@ import {useEffect, useState} from "react";
 import PasswordGenerator from "../features/passwordGenerator/PasswordGenerator";
 import {openConfirmModal} from "@mantine/modals";
 import PasswordLister from "../features/passwordGenerator/PasswordLister";
+import secureLocalStorage from "react-secure-storage";
 
 const useStyles = createStyles((theme) => ({
   root: {
@@ -44,7 +45,7 @@ const MainPage = ({hasStore, setHasStore}: any) => {
   const {classes} = useStyles();
 
   useEffect(() => {
-    const store = localStorage.getItem("store");
+    const store: any = secureLocalStorage.getItem("store");
     if (store) {
       const storeObj = JSON.parse(store);
       setUsername(storeObj.name);
@@ -81,7 +82,7 @@ const MainPage = ({hasStore, setHasStore}: any) => {
     setPassword("");
     setPasswordList([]);
     setHasStore(false);
-    localStorage.removeItem("store");
+    secureLocalStorage.removeItem("store");
   }
 
   if (loading)

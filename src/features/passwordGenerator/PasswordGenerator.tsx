@@ -6,11 +6,12 @@ import {
   Overlay,
   createStyles,
 } from "@mantine/core";
-import { useState } from "react";
-import { useModals } from "@mantine/modals";
-import { passwordGenerator } from "./password-utils";
-import { v4 as uuidv4 } from "uuid";
-import { showNotification } from "@mantine/notifications";
+import {useState} from "react";
+import {useModals} from "@mantine/modals";
+import {passwordGenerator} from "./password-utils";
+import {v4 as uuidv4} from "uuid";
+import {showNotification} from "@mantine/notifications";
+import secureLocalStorage from "react-secure-storage";
 
 const useStyles = createStyles((theme) => ({
   rootBox: {
@@ -44,7 +45,7 @@ const PasswordGenerator = ({
 }: any) => {
   const [length, setLength] = useState("");
   const [copyOverlay, setCopyOverlay] = useState(false);
-  const { classes } = useStyles();
+  const {classes} = useStyles();
   const modals = useModals();
 
   const handleGenerate = (length: any) => {
@@ -96,11 +97,11 @@ const PasswordGenerator = ({
   };
 
   const syncToLocalStorage = (newPasswordObject: any) => {
-    const store = localStorage.getItem("store");
+    const store: any = secureLocalStorage.getItem("store");
     if (store) {
       const storeObj = JSON.parse(store);
       if (storeObj.passwords !== passwordList) {
-        localStorage.setItem(
+        secureLocalStorage.setItem(
           "store",
           JSON.stringify({
             ...storeObj,
@@ -128,7 +129,7 @@ const PasswordGenerator = ({
           label="Name"
         />
       ),
-      labels: { confirm: "Add", cancel: "Cancel" },
+      labels: {confirm: "Add", cancel: "Cancel"},
       onCancel: () => console.log("Cancel"),
       onConfirm: () => {
         handleAddItem(name);
